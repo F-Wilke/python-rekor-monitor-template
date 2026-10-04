@@ -1,0 +1,19 @@
+1.
+a. This would be prevented by the Create-Artifact rule. It would catch the deviation using its MATCH rule.
+b. This would not be caught by any of the rules. The pipeline assumes the upstream repo state as uncompromised.
+
+2.
+This would not be prevented by the rules. The developers key is the only thing that identifies him as a trustworthy actor.
+
+
+3.
+This would be prevented. The layout defines the developer as the only actor who can create artifact.md.
+
+4.
+This would also be prevented because the metadata is matched with the artifact. The old metadata would be recognized as belonging to another artifact.
+
+5.
+This would be prevented by the Sign rule. It does not allow any modifications of the artifact.md file.
+
+6. 
+This would not result in a failure. As the layout is the source of truth of the build pipeline, any malicious modifications to the layout and with that to the build pipeline could be made.
