@@ -1,0 +1,7 @@
+# GitHub owner and reviewer for critical code and project policies
+* @F-Wilke
+/main.py @F-Wilke
+/merkle_proof.py @F-Wilke
+/util.py @F-Wilke
+/.github/ @F-Wilke
+/SECURITY.md @F-Wilke
