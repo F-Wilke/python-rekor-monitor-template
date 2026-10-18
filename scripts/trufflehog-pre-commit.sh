@@ -9,7 +9,7 @@ fi
 # TruffleHog filesystem stdin scans only the staged patch, not repository history.
 patch=$(mktemp)
 trap 'rm -f "$patch"' EXIT
-git diff --cached --binary --no-ext-diff -- . ':(exclude)poetry.lock' > "$patch"
+git diff --cached --binary --no-ext-diff -- . > "$patch"
 if [ ! -s "$patch" ]; then
   exit 0
 fi
