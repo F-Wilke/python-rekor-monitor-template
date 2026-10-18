@@ -45,6 +45,16 @@ jobs:
             git commit -m 'Apply Ruff formatting and lock Poetry dependencies'
             git push
           fi
+      - name: Run tests and enforce coverage
+        run: |
+          poetry run pytest --cov=main --cov=merkle_proof --cov=util --cov-report=term-missing --cov-report=html --cov-fail-under=75 | tee coverage-output.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-evidence
+          path: |
+            coverage-output.txt
+            htmlcov/
       - name: Collect final reports
         shell: bash
         run: |
