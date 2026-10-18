@@ -15,6 +15,9 @@ ruff = "^0.13.0"
 mypy = "^1.18.0"
 bandit = "^1.8.0"
 types-requests = ">=2.31,<3"
+pytest = "^8.3"
+pytest-cov = "^6.0"
+pre-commit = "^4.0"
 
 [tool.ruff]
 line-length = 88
@@ -34,3 +37,15 @@ exclude = "baseline"
 [tool.bandit]
 exclude_dirs = [".git", ".venv", "baseline", "tests"]
 targets = ["main.py", "merkle_proof.py", "util.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.coverage.run]
+source = ["main", "merkle_proof", "util"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 75
