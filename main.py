@@ -214,24 +214,29 @@ def main():
         checkpoint = get_latest_checkpoint(debug)
         print(json.dumps(checkpoint, indent=4))
     if args.inclusion:
-        inclusion(args.inclusion, args.artifact, debug)
+        retVal = inclusion(args.inclusion, args.artifact, debug)
+        if not retVal:
+            exit(1)
     if args.consistency:
         if not args.tree_id:
             print("please specify tree id for prev checkpoint")
-            return
+            exit(1)
         if not args.tree_size:
             print("please specify tree size for prev checkpoint")
-            return
+            exit(1)
         if not args.root_hash:
             print("please specify root hash for prev checkpoint")
-            return
+            exit(1)
 
         prev_checkpoint = {}
         prev_checkpoint["treeID"] = args.tree_id
         prev_checkpoint["treeSize"] = args.tree_size
         prev_checkpoint["rootHash"] = args.root_hash
 
-        consistency(prev_checkpoint, debug)
+        retVal = consistency(prev_checkpoint, debug)
+        if not retVal:
+            exit(1)
+
 
 if __name__ == "__main__":
     main()
