@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: trufflehog-commit
+        name: TruffleHog (proposed commit diff)
+        entry: bash scripts/trufflehog-pre-commit.sh
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+        always_run: true
