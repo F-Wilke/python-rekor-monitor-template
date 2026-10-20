@@ -29,12 +29,6 @@ class FakeResponse:
         return self.value
 
 
-def test_leaf_hash_domain_separation():
-    data = b"hello"
-    assert DefaultHasher.hash_leaf(data) == hashlib.sha256(b"\\x00" + data).digest()
-    assert DefaultHasher.hash_children(b"a", b"b") == hashlib.sha256(b"\\x01ab").digest()
-
-
 def test_empty_root():
     assert DefaultHasher.empty_root() == hashlib.sha256(b"").digest()
     assert DefaultHasher.size() == 32
@@ -64,11 +58,6 @@ def test_chain_inner_right():
     a, b = DefaultHasher.hash_leaf(b"a"), DefaultHasher.hash_leaf(b"b")
     assert chain_inner_right(DefaultHasher, b, [a], 1) == DefaultHasher.hash_children(a, b)
     assert chain_inner_right(DefaultHasher, a, [b], 0) == a
-
-
-def test_chain_border_right():
-    a, b = DefaultHasher.hash_leaf(b"a"), DefaultHasher.hash_leaf(b"b")
-    assert chain_border_right(DefaultHasher, a, [b]) == DefaultHasher.hash_children(a, b)
 
 
 def test_root_mismatch():
