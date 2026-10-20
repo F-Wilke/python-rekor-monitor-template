@@ -15,7 +15,7 @@ Use a known artifact and its Rekor log index to check inclusion and signature:
 
 ```sh
 poetry run python main.py --checkpoint
-poetry run python main.py --inclusion 123456 --artifact ./artifact.bin
+poetry run python main.py --inclusion 123456 --artifact ./artifact.json
 poetry run python main.py --consistency --tree-id TREE_ID --tree-size OLD_SIZE --root-hash OLD_HEX_ROOT
 ```
 
