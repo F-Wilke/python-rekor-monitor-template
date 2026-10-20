@@ -1,9 +1,10 @@
 1.
 a. This would be prevented by the create-artifact rule. It would catch the deviation using the rule "["MATCH", "*", "WITH", "PRODUCTS", "FROM", "checkout"]" for its expected materials.
-b. This would not be caught by any of the rules. The pipeline assumes the upstream repo state as uncompromised.
+b. This would not be caught by any of the rules. The pipeline assumes the upstream repo state as uncompromised. To prevent this I would add security checks on the repository. Common forges such as Github allow project owners to define rules on who can push to which branch of a repository. Even better, gittuf could be used to eliminate the forge as a trusted party for enforcing these permissions. 
 
 2.
 This would not be prevented by the rules. The developers key is the only thing that identifies him as a trustworthy actor. There is no additional signature required for the buld to count as genuine. 
+To prevent this, it could be made a requirement that multiple developers sign off on each new build with their keys. Then, a single leaked key could not cause a falsified build.
 
 
 3.
@@ -17,3 +18,4 @@ This would be prevented by the sign rule. It demands that artifact.md matches th
 
 6. 
 This would not result in a failure. As the layout is the source of truth of the build pipeline, any malicious modifications to the layout and with that to the build pipeline could be made.
+This could be prevented by making the layout signing key ephemeral. If it is only valid for the short period of time during which the owner wants to do a modification to the layout, then it is not a problem if the key is later leaked to an adversary. 
